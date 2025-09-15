@@ -11,9 +11,6 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-// -----------------------------
-// Data: keep original items (deduped lightly)
-// -----------------------------
 const menuItems = [
   {
     name: "Industry",
@@ -97,6 +94,7 @@ const menuItems = [
       },
     ],
   },
+  {name:"Services", href:"https://addverb.com/"},
   {
     name: "Newsroom",
     href: "#",
@@ -121,9 +119,6 @@ const menuItems = [
   },
 ];
 
-// -----------------------------
-// Utility hooks
-// -----------------------------
 function useDebouncedValue(value, delay = 250) {
   const [v, setV] = useState(value);
   useEffect(() => {
@@ -154,9 +149,7 @@ function useIsDesktop(breakpoint = 768) {
   return isDesktop;
 }
 
-// -----------------------------
-// Search utilities (memoized)
-// -----------------------------
+
 function filterMenu(items, query) {
   if (!query) return items;
   const q = query.toLowerCase();
@@ -186,9 +179,7 @@ function searchMenu(items, query, path = []) {
   return results;
 }
 
-// -----------------------------
-// Components
-// -----------------------------
+
 const styles = {
   link: "px-2 hover:text-red-600 transition text-gray-800",
   btn: "p-2 rounded hover:bg-gray-100 transition",
@@ -554,4 +545,53 @@ export default function App() {
     </div>
   );
 }
+// src/App.jsx
+// import React, { useState, useMemo } from "react";
+// import Navbar from "./components/Navbar/Navbar.jsx";
+// import BannerCarousel from "./components/Carousel/BannerCaroussel.jsx";
+// import Hero from "./components/Hero/Hero";
+// import IconRow from "./components/IconRow/IconRow";
+// import Footer from "./components/Footer/Footer";
+
+// import { menuItems } from "./utils/menuItems";
+// import { searchMenu } from "./utils/searchMenu";
+// import MobileRecursiveList from "./components/Menu/MobileRecursiveList";
+
+// export default function App() {
+//   const [mobileOpen, setMobileOpen] = useState(false);
+//   const [query, setQuery] = useState("");
+
+//   // flat matches for search dropdown
+//   const flatMatches = useMemo(() => searchMenu(menuItems, query), [query]);
+
+//   return (
+//     <div className="font-sans">
+//       {/* Navbar */}
+//       <Navbar
+//         mobileOpen={mobileOpen}
+//         setMobileOpen={setMobileOpen}
+//         query={query}
+//         setQuery={setQuery}
+//         flatMatches={flatMatches}
+//       />
+
+//       {/* Mobile Menu Drawer */}
+//       {mobileOpen && (
+//         <div className="fixed inset-0 z-40 bg-black/30 md:hidden">
+//           <div className="absolute left-0 top-0 h-full w-80 bg-white shadow-lg p-4 overflow-y-auto">
+//             <MobileRecursiveList items={menuItems} onOpen={() => {}} />
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Main Sections */}
+//       <Hero />
+//       <BannerCarousel />
+//       <IconRow />
+
+//       {/* Footer */}
+//       <Footer />
+//     </div>
+//   );
+// }
 
