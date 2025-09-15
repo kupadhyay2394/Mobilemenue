@@ -60,8 +60,8 @@ const menuItems = [
             href: "https://addverb.com/functionality/",
             subMenu: [
               { name: "Autonomous Forklift", href: "https://addverb.com/functionality/" },
-              { name: "Autonomous Mobile Robot", href: "https://addverb.com/functionality/" },
-              { name: "Multi-Carton Picking Robot", href: "https://addverb.com/functionality/" },
+              { name: "Autonomous Mobile", href: "https://addverb.com/functionality/" },
+              { name: "Multi-Carton Picking", href: "https://addverb.com/functionality/" },
               { name: "Rail Guided Vehicle", href: "https://addverb.com/functionality/" },
             ],
           },
@@ -70,19 +70,19 @@ const menuItems = [
             href: "https://addverb.com/functionality/",
             subMenu: [
               { name: "Robotic Sorter", href: "https://addverb.com/functionality/" },
-              { name: "Vertical Sortation Robot", href: "https://addverb.com/functionality/" },
+              { name: "Vertical Sortation", href: "https://addverb.com/functionality/" },
             ],
           },
           {
             name: "ASRS",
             href: "https://addverb.com/functionality/",
             subMenu: [
-              { name: "4 Way Pallet Shuttle", href: "" },
-              { name: "Mother-Child Shuttle", href: "#" },
-              { name: "Pallet Shuttle", href: "#" },
-              { name: "Crane ASRS", href: "#" },
-              { name: "Carton Shuttle", href: "#" },
-              { name: "Multi Level Shuttle", href: "#" },
+              { name: "4 Way Pallet", href: "" },
+              { name: "Mother-Child", href: "#" },
+              { name: "Pallet", href: "#" },
+              { name: "Crane", href: "#" },
+              { name: "Carton", href: "#" },
+              { name: "Multi Level", href: "#" },
             ],
           },
           {
@@ -100,10 +100,10 @@ const menuItems = [
             name: "Software",
             href: "#",
             subMenu: [
-              { name: "Warehouse Management System", href: "#" },
-              { name: "Warehouse Execution System", href: "#" },
-              { name: "Warehouse Control System", href: "#" },
-              { name: "Fleet Management System", href: "#" },
+              { name: "Management System", href: "#" },
+              { name: "Execution System", href: "#" },
+              { name: "Control System", href: "#" },
+              { name: "Fleet Management", href: "#" },
             ],
           },
         ],
@@ -277,7 +277,7 @@ function MobileRecursiveList({ items, onOpen}) {
        
       {items.map((it, i) => (
         <li key={i} className="py-3 ">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <div  href={it.href} className=" truncate text-xl"><a href={it.href}>{it.name}</a></div>
             {it.subMenu ? (
               <button
@@ -324,7 +324,7 @@ function MobileMenu({ items, query, setQuery, onClose, flatMatches }) {
     const newIdx = stack.length - 2;
     setIndex(newIdx);
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setStack((s) => s.slice(0, -1)), DURATION);
+    timer.current = setTimeout(() => setStack((s) => s.slice(0, -1)), 1);
   };
 
   const isSearching = query && query.trim().length > 0;
@@ -434,13 +434,7 @@ function Navbar({ mobileOpen, setMobileOpen, query, setQuery, flatMatches }) {
         </div>
 
           <div className="flex items-center gap-3">
-            {/* <button
-              className="sm:hidden p-2 rounded hover:bg-gray-100"
-              aria-label="Open mobile menu"
-              onClick={() => setMobileOpen((v) => !v)}
-            >
-              <Search size={18} />
-            </button> */}
+           
 
             <button className="md:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu">
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -642,11 +636,12 @@ function App() {
 
    
 <div
-  className={`h-auto fixed top-0 right-0 w-1/2 bg-white z-40 md:hidden transform transition-transform duration-500 ease-out ${
+  className={`h-auto fixed top-0 right-0 w-1/2 bg-white z-40 md:hidden transform transition-transform duration-500 ease-out border border-gray-300 rounded-l-2xl shadow-lg ${
     mobileOpen ? "translate-x-0" : "translate-x-full"
   }`}
   aria-hidden={!mobileOpen}
 >
+
   <MobileMenu 
     items={filtered}
     query={query}
