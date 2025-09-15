@@ -1,607 +1,6 @@
-// import { useState,useRef } from "react";
-// import {
-//   ChevronDown,
-//   ChevronRight,
-//   Search,
-//   Menu,
-//   X,
-// } from "lucide-react";
 
 
-// // ✅ Example nested data
-// const menuItems = [
-//   {
-//     name: "Industry",
-//     subMenu: [
-//       { name: "afgdfg", href: "#" },
-//       { name: "bgfdfg", href: "#" },
-//     ],
-//   },
-//   {
-//     name: "Solutions",
-//     subMenu: [
-//       {
-//         name: "sub1",
-//         subMenu: [
-//           { name: "sub1.2", subMenu: [{ name: "sub1.2.1", href: "#" }, { name: "sub1.2.2", href: "#" }] },
-//           { name: "sub1.3", subMenu: [{ name: "sub1.3.1", href: "#" }, { name: "sub1.3.2", href: "#" }, { name: "sub1.3.3", href: "#" }] },
-//           { name: "sub1.4", subMenu: [{ name: "sub1.4.1", href: "#" }, { name: "sub1.4.2", href: "#" }] },
-//           { name: "sub1.5", subMenu: [{ name: "sub1.5.1", href: "#" }, { name: "sub1.5.2", href: "#" }] },
-//         ],
-//       },
-//       {
-//         name: "sub2",
-//         subMenu: [
-//           { name: "sub2.1", subMenu: [{ name: "sub2.1.1", href: "#" }, { name: "sub2.1.2", href: "#" }] },
-//           { name: "sub2.2", subMenu: [{ name: "sub2.2.1", href: "#" }, { name: "sub2.2.2", href: "#" }] },
-//           { name: "sub2.3", subMenu: [{ name: "sub2.3.1", href: "#" }, { name: "sub2.3.2", href: "#" }, { name: "sub2.3.3", href: "#" }] },
-//           { name: "sub2.4", subMenu: [{ name: "sub2.4.1", href: "#" }, { name: "sub2.4.2", href: "#" }] },
-//         ],
-//       },
-//     ],
-//   },
-//   { name: "Services", href: "#" },
-//   {
-//     name: "Newsroom",
-//     subMenu: [
-//       { name: "sub1", href: "#" },
-//       { name: "sub2", href: "#" },
-//       { name: "sub3", href: "#" },
-//       { name: "sub4", href: "#" },
-//       { name: "sub5", href: "#" },
-//       { name: "sub6", href: "#" },
-//     ],
-//   },
-//   {
-//     name: "Menu",
-//     subMenu: [
-//       { name: "sub1", href: "#" },
-//       { name: "sub2", href: "#" },
-//     ],
-//   },
-// ];
 
-// import { useEffect } from "react";
-
-// // ✅ Hook: detect if screen is desktop
-// function useIsDesktop(breakpoint = 768) {
-//   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= breakpoint);
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setIsDesktop(window.innerWidth >= breakpoint);
-//     };
-
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, [breakpoint]);
-
-//   return isDesktop;
-// }
-
-
-// // 🔎 Recursive filter
-// function filterMenu(items, query) {
-//   if (!query) return items;
-//   return items
-//     .map((item) => {
-//       if (item.name.toLowerCase().includes(query.toLowerCase())) return item;
-//       if (item.subMenu) {
-//         const filteredSub = filterMenu(item.subMenu, query);
-//         if (filteredSub.length > 0) return { ...item, subMenu: filteredSub };
-//       }
-//       return null;
-//     })
-//     .filter(Boolean);
-// }
-
-// // const RecursiveMenu = ({ items, isRoot = true }) => {
-// //   const [openIdx, setOpenIdx] = useState(null);
-// //   const toggle = (idx) => setOpenIdx((prev) => (prev === idx ? null : idx));
-
-// //   return (
-// //     <ul className={`${isRoot ? "divide-y divide-black" : ""}`}>
-// //       {items.map((item, idx) => (
-// //         <li key={idx} className="py-2 pl-2">
-// //           <div className="flex justify-between  items-center">
-// //             {item.subMenu ? (
-// //               <p
-// //                 className={`${
-// //                   openIdx === idx ? "text-red-800" : "text-black-800"
-// //                 } text-xl  py-4 transition`}
-// //               >
-// //                 {item.name}
-// //               </p>
-// //             ) : (
-// //               <p href={item.href || "#"} className="text-black-800 hover:text-red-500 transition text-xl py-4">
-// //                 {item.name}
-// //               </p>
-// //             )}
-// //             {item.subMenu && (
-// //               <button onClick={() => toggle(idx)}>
-// //                 {openIdx === idx ? (
-// //                   <ChevronDown size={16} className="text-black-800" />
-// //                 ) : (
-// //                   <ChevronRight size={16} className="text-black-800" />
-// //                 )}
-// //               </button>
-// //             )}
-// //           </div>
-
-// //           {item.subMenu && openIdx === idx && (
-// //             <div className="mt-1 rounded-md">
-// //               <RecursiveMenu items={item.subMenu} isRoot={false} />
-// //             </div>
-// //           )}
-// //         </li>
-// //       ))}
-// //     </ul>
-// //   );
-// // };
-
-// // ...existing code...
-// function Navbar({ mobileOpen, setMobileOpen }) {
-//   return (
-//     <nav className="bg-white shadow-md">
-//       <div className="max-w-7xl mx-auto px-4">
-//         <div className="flex justify-between items-center py-4">
-//           <div className="text-xl font-bold text-red-600">ADDVERB</div>
-//           <button
-//             className="md:hidden text-black"
-//             onClick={() => setMobileOpen(!mobileOpen)}
-//           >
-//             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
-//           </button>
-
-//           {/* Desktop Menu */}
-//           <ul className="hidden md:flex space-x-5">
-//             {menuItems.map((item, idx) => (
-//               <li key={idx} className="relative group">
-//                 <a
-//                   href={item.href || "#"}
-//                   className="flex items-center  hover:text-red-500 transition"
-//                 >
-//                   {item.name}
-//                   {/* show ChevronRight for any item that has subMenu */}
-//                   {item.subMenu && <ChevronRight size={16} />}
-//                 </a>
-
-//                 {item.subMenu && (
-//                   <ul className="absolute left-0 mt-2 min-w-48 bg-white border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-//                     {item.subMenu.map((sub, subIdx) => (
-//                       <li key={subIdx}>
-//                         <a
-//                           href={sub.href || "#"}
-//                           className="flex items-center justify-between px-4 py-2 text-sm hover:bg-gray-50"
-//                         >
-//                           <span>{sub.name}</span>
-//                           {/* show ChevronRight for nested items that have their own subMenu */}
-                  
-//                           {sub.subMenu && <ChevronRight size={14} />}
-//                         </a>
-
-//                         {/* optional deeper nested dropdown (keeps showing chevrons) */}
-//                         {sub.subMenu && (
-//                           <ul className="pl-4">
-//                             {sub.subMenu.map((deep, dIdx) => (
-//                               <li key={dIdx}>
-//                                 <a
-//                                   href={deep.href || "#"}
-//                                   className="flex items-center justify-between px-4 py-2 text-sm hover:bg-gray-50"
-//                                 >
-//                                   <span>{deep.name}</span>
-//                                   {deep.subMenu && <ChevronRight size={12} />}
-//                                 </a>
-//                               </li>
-//                             ))}
-//                           </ul>
-//                         )}
-//                       </li>
-//                     ))}
-//                   </ul>
-//                 )}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// }
-// // ...existing code...
-
-// function Hero() {
-//   return (
-//     <section id="home" className="py-18">
-//       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
-//         <div>
-//           <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-3">Frontend Developer</h1>
-//           <p className="text-gray-600 mb-4">I build fast, responsive web apps with React and modern tooling.</p>
-//           <div className="flex gap-3 flex-wrap">
-//             <a className="inline-block px-4 py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors" href="#projects">
-//               View Projects
-//             </a>
-//             <a className="inline-block px-4 py-2.5 rounded-lg border border-gray-200 text-gray-900 hover:border-blue-200 transition-colors" href="#contact">
-//               Contact Me
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-// // ...existing code...
-
-// // ------------------ Mobile-specific menu that replaces parent with child ------------------
-// // ...existing code...
-// // ...existing code...
-// // ...existing code...
-// function MobileMenu({ items, query, setQuery }) {
-//   const DURATION = 1000; // ms
-//   const [stack, setStack] = useState([items]);
-//   const [targetIndex, setTargetIndex] = useState(0);
-//   const timerRef = useRef(null);
-
-//   useEffect(() => {
-//     // reset when top-level items change (search etc.)
-//     setStack([items]);
-//     setTargetIndex(0);
-//     return () => clearTimeout(timerRef.current);
-//   }, [items]);
-
-//   const openItem = (item) => {
-//     if (!item.subMenu) return;
-//     setStack((s) => {
-//       const newStack = [...s, item.subMenu];
-//       // slide to the newly pushed panel (each panel is 100% width)
-//       setTargetIndex(newStack.length - 1);
-//       return newStack;
-//     });
-//   };
-
-//   const goBack = () => {
-//     if (stack.length <= 1) return;
-//     const newIndex = stack.length - 2;
-//     // slide back to previous panel
-//     setTargetIndex(newIndex);
-
-//     clearTimeout(timerRef.current);
-//     timerRef.current = setTimeout(() => {
-//       setStack((s) => s.slice(0, -1));
-//       // keep targetIndex valid after popping
-//       setTargetIndex((idx) => Math.min(idx, Math.max(0, newIndex)));
-//     }, DURATION);
-//   };
-
-//   return (
-//     <div className="relative">
-//       {/* Header: Back button + Search on same row */}
-//       <div className="flex items-center gap-2 px-2 py-3 border-b">
-        
-
-//         <div className="flex-1">
-//           <div className="flex items-center gap-2 border border-gray-300 rounded-lg px-3 py-1">
-//             <Search size={16} className="text-gray-500" />
-//             <input
-//               type="text"
-//               placeholder="Search menu..."
-//               value={query}
-//               onChange={(e) => setQuery(e.target.value)}
-//               className="w-full outline-none text-sm"
-//             />
-//           </div>
-//         </div>
-//         <div className="flex-shrink-0">
-//           {stack.length > 1 ? (
-//             <button
-//               onClick={goBack}
-//               className="px-2 py-1 rounded hover:bg-gray-100 text-sm"
-//               aria-label="Go back"
-//             >
-//               ← Back
-//             </button>
-//           ) : null}
-//         </div>
-//       </div>
-
-//        <div className="relative overflow-hidden">
-//         <div
-//           // panels are full width; translateX moves by 100% per panel
-//           style={{
-//             width: `${stack.length * 100}%`,
-//             transform: `translateX(-${targetIndex * 100}%)`,
-//             transition: `transform ${DURATION}ms ease`,
-//             display: "flex",
-//           }}
-//         >
-//           {stack.map((level, lvlIdx) => (
-//             <div
-//               key={lvlIdx}
-//               // each panel occupies 100% of the viewport area inside the carousel
-//               style={{ width: "100%" }}
-//               className="flex-shrink-0 px-4 py-2"
-//             >
-//               <ul className="divide-y divide-black">
-//                 {level.map((item, idx) => (
-//                   <li key={idx} className="py-2"> {/* removed pl-2 to eliminate indentation */}
-//                     <div className="flex justify-between items-center">
-//                       {item.subMenu ? (
-//                         <button
-//                           onClick={() => openItem(item)}
-//                           className="text-left text-xl py-4 w-full flex items-center justify-between text-blue-800 hover:text-red-500 transition"
-//                         >
-//                           <span className="text-black-800">{item.name}</span>
-//                           <ChevronRight size={16} className="text-black-800" />
-//                         </button>
-//                       ) : (
-//                         <a
-//                           href={item.href || "#"}
-//                           className="text-black-800 hover:text-red-500 text-left text-xl py-4 w-full flex items-center justify-between transition"
-//                         >
-//                           {item.name}
-//                         </a>
-//                       )}
-//                     </div>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-// // ...existing code...
-// // ...existing code...
-// // ...existing code...
-
-// // ...existing code...
-
-// // ...existing code...
-// function App() {
-//   const [mobileOpen, setMobileOpen] = useState(false);
-//   const [query, setQuery] = useState("");
-
-//   const filteredItems = filterMenu(menuItems, query);
-//   const isDesktop = useIsDesktop();
-
-//   return (
-//     <>
-//       <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-
-//       {/* Mobile sliding panel: stays in DOM and slides in/out from left */}
- 
-//       <div
-//         className={`fixed inset-y-0 left-0 w-full max-w-xs bg-white z-40 md:hidden transform transition-transform duration-700 ease-out ${
-//           mobileOpen ? "translate-x-0" : "-translate-x-full"
-//         }`}
-//         aria-hidden={!mobileOpen}
-//       >
-//         <div className="px-4 py-2 space-y-4">
-//           {/* Removed the separate search here — search moved into MobileMenu header */}
-//           {/* Mobile: show replaced menus via MobileMenu; Desktop still uses RecursiveMenu */}
-//           {filteredItems.length > 0 ? (
-//             <div>
-//               {isDesktop ? (
-//                 <RecursiveMenu className="border-solid-black border-b block mt-2 " items={filteredItems} />
-//               ) : (
-//                 <MobileMenu items={filteredItems} query={query} setQuery={setQuery} />
-//               )}
-//             </div>
-//           ) : (
-//             <p className="text-gray-500 text-sm ">No matches found</p>
-//           )}
-
-//           <div className="flex justify-around mt-6">
-//             <PodcastIcon />
-//             <EnquireIcon />
-//             <BlogIcon />
-//             <SupportIcon />
-//           </div>
-//         </div>
-//       </div>
-//       {/* Main content (Hero) remains — optionally dim when mobile menu open */}
-//       <div className={`transition-opacity duration-300 ${mobileOpen ? "opacity-50" : "opacity-100"}`}>
-//         {!mobileOpen && <Hero />}
-//         {/* If you want Hero visible under the sliding panel on mobile, keep it rendered always:
-//             <Hero /> 
-//            but above code preserves previous behavior while still enabling slide animation.
-//         */}
-//       </div>
-
-//       <Footer />
-//     </>
-//   );
-// }
-// export default App;
-// // ...existing code...
-// // ...existing code...
-
-
-// function Footer() {
-//   return (
-//     <footer className="py-6 border-t border-gray-200 bg-white">
-//       <div className="max-w-7xl mx-auto px-4">
-//         <p className="text-gray-500">© {new Date().getFullYear()} Krishna Upadhyay. All rights reserved.</p>
-//       </div>
-//     </footer>
-//   );
-// }
-// // src/components/PodcastButton.jsx
-// import { Play } from "lucide-react";
-
-// const PodcastIcon = ({ size = 64, color = "text-red-500" }) => {
-//   return (
-//     <div className="flex flex-col items-center space-y-2">
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         className={`${color}`}
-//         fill="none"
-//         viewBox="0 0 64 64"
-//         width={size}
-//         height={size}
-//         stroke="currentColor"
-//         strokeWidth="3"
-//       >
-//         {/* Microphone body */}
-//         <rect x="24" y="12" width="16" height="28" rx="8" />
-//         {/* Microphone stand */}
-//         <line x1="32" y1="40" x2="32" y2="52" />
-//         <line x1="24" y1="52" x2="40" y2="52" />
-
-       
-//         <path d="M28 16 Q32 12 36 16" />   
-//         <path d="M24 12 Q32 4 40 10" />  
- 
-//       </svg>
-//       <span className="text-gray-700 text-sm font-medium">Podcasts</span>
-//     </div>
-//   );
-// };
-// // src/components/EnquireIcon.jsx
-// import React from "react";
-
-// const EnquireIcon = ({ size = 64, color = "text-red-500" }) => {
-//   return (
-//     <div className="flex flex-col items-center space-y-2">
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         className={`${color}`}
-//         fill="none"
-//         viewBox="0 0 64 64"
-//         width={size}
-//         height={size}
-//         stroke="currentColor"
-//         strokeWidth="3"
-//       >
-//         {/* Paper */}
-//         <rect x="14" y="10" width="36" height="44" rx="2" />
-//         <line x1="20" y1="20" x2="36" y2="20" />
-//         <line x1="20" y1="28" x2="36" y2="28" />
-//         <line x1="20" y1="36" x2="28" y2="36" />
-
-//         {/* Pen (diagonal) */}
-//         <path d="M38 34 L48 44 L44 48 L34 38 Z" />
-//       </svg>
-//       <span className="text-gray-700 text-sm font-medium">Enquire</span>
-//     </div>
-//   );
-// };
-// const BlogIcon = ({ size = 64, color = "text-red-500" }) => {
-//   return (
-//     <div className="flex flex-col items-center space-y-2">
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         className={`${color}`}
-//         fill="none"
-//         viewBox="0 0 64 64"
-//         width={size}
-//         height={size}
-//         stroke="currentColor"
-//         strokeWidth="3"
-//       >
-//         {/* Document outline */}
-//         <rect x="16" y="10" width="32" height="44" rx="2" />
-
-//         {/* Folded corner */}
-//         <polyline points="40,10 48,18 48,10" />
-
-//         {/* Text lines */}
-//         <line x1="22" y1="24" x2="42" y2="24" />
-//         <line x1="22" y1="32" x2="42" y2="32" />
-//         <line x1="22" y1="40" x2="34" y2="40" />
-//       </svg>
-//       <span className="text-gray-700 text-sm font-medium">Blog</span>
-//     </div>
-//   );
-// };
-
-// const SupportIcon = ({ size = 64, color = "text-red-500" }) => {
-//   return (
-//     <div className="flex flex-col items-center space-y-2">
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         className={`${color}`}
-//         fill="none"
-//         viewBox="0 0 64 64"
-//         width={size}
-//         height={size}
-//         stroke="currentColor"
-//         strokeWidth="3"
-//       >
-//         {/* Hand */}
-//         <path d="M12 42 Q20 36 28 40 H44 Q48 40 48 44 Q48 48 44 48 H28 Q20 48 16 52 Z" />
-
-//         {/* 24/7 circle arrows */}
-//         <circle cx="46" cy="20" r="10" />
-//         <polyline points="46,12 50,16 46,20" />
-//         <polyline points="46,28 42,24 46,20" />
-
-//         {/* "24" text (simplified as bars for minimal icon style) */}
-//         <text x="41" y="23" fontSize="6" fill="currentColor">24</text>
-//       </svg>
-//       <span className="text-gray-700 text-sm font-medium">Support</span>
-//     </div>
-//   );
-// };
-
-
-// // function App() {
-// //   const [mobileOpen, setMobileOpen] = useState(false);
-// //   const [query, setQuery] = useState("");
-
-// //   const filteredItems = filterMenu(menuItems, query);
-
-// //   return (
-// //     <>
-// //       <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-// //       {mobileOpen ? (
-// //         <div className="px-4 py-2  space-y-4">
-// //           {/* 🔎 Search */}
-// //           <div className="flex items-center gap-2 border border-gray-300 rounded-lg px-3 py-2">
-// //             <Search size={18} className="text-gray-500" />
-// //             <input
-// //               type="text"
-// //               placeholder="Search menu..."
-// //               value={query}
-// //               onChange={(e) => setQuery(e.target.value)}
-// //               className="w-full outline-none text-sm"
-// //             />
-// //           </div>
-
-// //           {/* Filtered menu */}
-// //           {filteredItems.length > 0 ? (
-// //             <div>
-// //               <RecursiveMenu className="border-solid-black border-b block mt-2" items={filteredItems} />
-// //               {/* <span className="border-solid-black border-b block mt-2"></span> */}
-              
-// //             </div>
-// //           ) : (
-// //             <p className="text-gray-500 text-sm ">No matches found</p>
-// //           )}
-          
-// //           <div className="flex justify-around mt-6">
-// //           <PodcastIcon />
-// //           <EnquireIcon />
-// //           <BlogIcon />
-// //           <SupportIcon />
-// //           </div>
-
-// //         </div>
-// //       ) : (
-// //         <div>
-// //           <Hero />
-// //         </div>
-// //       )}
-// //       <Footer />
-// //     </>
-// //   );
-// // }
-
-// // export default App;
-
-// ...existing code...
 import React, { useState, useEffect, useRef } from "react";
 import {
   ChevronDown,
@@ -611,68 +10,132 @@ import {
   X,
 } from "lucide-react";
 
-/* -------------------------
-   Data (example nested menu)
-   ------------------------- */
+
 const menuItems = [
   {
     name: "Industry",
+    href: "https://addverb.com/industry/",
     subMenu: [
-      { name: "afgdfg", href: "#" },
-      { name: "bgfdfg", href: "#" },
+      { name: "Automotive and Tyre", href: "https://addverb.com/industry/automotive-and-tyre-automation/" },
+      { name: "Consumer Goods", href: "https://addverb.com/industry/consumer-goods-warehouse-automation/" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "Solar and Battery", href: "#" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "Chemicals and Petrochemicals", href: "#" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "E-Commerce", href: "#" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "Pharmaceuticals", href: "#" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "Third Party Logistics", href: "#" },
+      { name: "Grocery", href: "#https://addverb.com/industry/intralogistics-solutions-for-grocery/" },
+      { name: "Cold Storage", href: "#" },
+      { name: "Fashion", href: "#" },
+      { name: "Semiconductors", href: "https://addverb.com/" },
     ],
   },
   {
     name: "Solutions",
+    href: "https://addverb.com/functionality/",
     subMenu: [
       {
-        name: "sub1",
+        name: "Functionality",
+        href: "https://addverb.com/functionality/",
         subMenu: [
-          {
-            name: "sub1.2",
-            subMenu: [
-              { name: "sub1.2.1", href: "#" },
-              { name: "sub1.2.2", href: "#" },
-            ],
-          },
-          {
-            name: "sub1.3",
-            subMenu: [
-              { name: "sub1.3.1", href: "#" },
-              { name: "sub1.3.2", href: "#" },
-              { name: "sub1.3.3", href: "#" },
-            ],
-          },
+          { name: "Material Movement", href: "https://addverb.com/functionality/" },
+          { name: "Material Movement", href: "https://addverb.com/functionality/" },
+          { name: "Sortation", href: "https://addverb.com/functionality/" },
+          { name: "Picking", href: "https://addverb.com/functionality/" },
+          { name: "Storage", href: "https://addverb.com/functionality/" },
+          { name: "Reverse Logistics", href: "https://addverb.com/functionality/" },
         ],
       },
       {
-        name: "sub2",
+        name: "Product",
+        href: "https://addverb.com/functionality/",
         subMenu: [
           {
-            name: "sub2.1",
+            name: "Mobile Robots",
+            href: "https://addverb.com/functionality/",
             subMenu: [
-              { name: "sub2.1.1", href: "#" },
-              { name: "sub2.1.2", href: "#" },
+              { name: "Autonomous Forklift", href: "https://addverb.com/functionality/" },
+              { name: "Autonomous Mobile Robot", href: "https://addverb.com/functionality/" },
+              { name: "Multi-Carton Picking Robot", href: "https://addverb.com/functionality/" },
+              { name: "Rail Guided Vehicle", href: "https://addverb.com/functionality/" },
+            ],
+          },
+          {
+            name: "Sorting Robots",
+            href: "https://addverb.com/functionality/",
+            subMenu: [
+              { name: "Robotic Sorter", href: "https://addverb.com/functionality/" },
+              { name: "Vertical Sortation Robot", href: "https://addverb.com/functionality/" },
+            ],
+          },
+          {
+            name: "ASRS",
+            href: "https://addverb.com/functionality/",
+            subMenu: [
+              { name: "4 Way Pallet Shuttle", href: "" },
+              { name: "Mother-Child Shuttle", href: "#" },
+              { name: "Pallet Shuttle", href: "#" },
+              { name: "Crane ASRS", href: "#" },
+              { name: "Carton Shuttle", href: "#" },
+              { name: "Multi Level Shuttle", href: "#" },
+            ],
+          },
+          {
+            name: "Horizontal Carousel",
+            href: "#",
+          },
+          {
+            name: "Picking Systems",
+            href: "#",
+            subMenu: [
+              { name: "Pick-to-Light", href: "#" },
+            ],
+          },
+          {
+            name: "Software",
+            href: "#",
+            subMenu: [
+              { name: "Warehouse Management System", href: "#" },
+              { name: "Warehouse Execution System", href: "#" },
+              { name: "Warehouse Control System", href: "#" },
+              { name: "Fleet Management System", href: "#" },
             ],
           },
         ],
       },
     ],
   },
-  { name: "Services", href: "#" },
   {
     name: "Newsroom",
+    href: "#",
     subMenu: [
-      { name: "sub1", href: "#" },
-      { name: "sub2", href: "#" },
-      { name: "sub3", href: "#" },
+      { name: "Case Studies", href: "https://addverb.com/warehouse-automation-case-studies/" },
+      { name: "Blogs", href: "https://addverb.com/warehouse-automation-case-studies/" },
+      { name: "Whitepapers", href: "https://addverb.com/warehouse-automation-case-studies/" },
+      { name: "Events", href: "https://addverb.com/warehouse-automation-case-studies/" },
+      { name: "News", href: "https://addverb.com/warehouse-automation-case-studies/" },
+      { name: "Podcasts", href: "https://addverb.com/warehouse-automation-case-studies/" },
+      { name: "Sustainability", href: "https://addverb.com/warehouse-automation-case-studies/" },
+    ],
+  },
+  {
+    name: "Company",
+    href: "#",
+    subMenu: [
+      { name: "Careers", href: "https://careers.addverb.com/?_gl=1%2Ajrunz3%2A_ga%2AMTE4OTM4ODQwNy4xNzU3NTc0MTU4%2A_ga_YKN3VND4SB%2AczE3NTc5MjQ2MTMkbzIkZzEkdDE3NTc5MjUzMzEkajQxJGwwJGg4Mjg5NDc1NDg.%2A_gcl_au%2ANzQyNTc5OTc1LjE3NTc1NzQxNjE." },
+      { name: "About Us", href: "https://addverb.com/about-us/" },
+      { name: "Partners", href: "https://addverb.com/partnerships-and-alliances/" },
     ],
   },
 ];
 
-/* -------------------------
-   Utilities & hooks
-   ------------------------- */
+
+
 function useIsDesktop(breakpoint = 768) {
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= breakpoint : true);
   useEffect(() => {
@@ -698,38 +161,73 @@ function filterMenu(items, query) {
     .filter(Boolean);
 }
 
-/* -------------------------
-   Recursive Desktop Menu
-   ------------------------- */
+function searchMenu(items, query, path = []) {
+  const q = (query || "").trim().toLowerCase();
+  if (!q) return [];
+  const results = [];
+
+  for (const item of items) {
+    const itemPath = [...path, item.name];
+    if (item.name.toLowerCase().includes(q)) {
+      results.push({
+        name: item.name,
+        href: item.href || null,
+        path: itemPath,
+        item,
+      });
+    }
+    if (item.subMenu) {
+      results.push(...searchMenu(item.subMenu, query, itemPath));
+    }
+  }
+
+  return results;
+}
+
+
+
 function RecursiveMenu({ items, level = 0 }) {
   const [openIdx, setOpenIdx] = useState(null);
+
   const toggle = (i) => setOpenIdx((prev) => (prev === i ? null : i));
 
   return (
-    <ul className={`${level === 0 ? "flex items-center gap-5" : "mt-1"}`}>
+    <ul className={`${level === 0 ? "flex items-center gap-5" : "mt-1 space-y-1"}`}>
       {items.map((item, idx) => (
-        <li key={idx} className={`relative ${level > 0 ? "py-1" : ""}`}>
-          <div className="flex items-center">
+        <li key={idx} className="relative">
+          <div className="flex items-center gap-2">
+        
             {item.href ? (
-              <a href={item.href} className="hover:text-red-500 transition px-2">
+              <a href={item.href} className="px-2 hover:text-red-500 transition">
                 {item.name}
               </a>
             ) : (
+              <span className="px-2">{item.name}</span>
+            )}
+
+         
+            {item.subMenu && (
               <button
-                onClick={() => (item.subMenu ? toggle(idx) : undefined)}
-                className={`flex items-center gap-2 px-2 ${openIdx === idx ? "text-red-600" : "text-black"}`}
-                aria-expanded={item.subMenu ? openIdx === idx : undefined}
+                onClick={() => toggle(idx)}
+                className={`p-1 rounded hover:bg-gray-100 transition`}
+                aria-expanded={openIdx === idx}
+                aria-haspopup="true"
               >
-                <span>{item.name}</span>
-                {item.subMenu && (
-                  <ChevronRight size={14} className={`transition-transform ${openIdx === idx ? "rotate-90" : ""}`} />
-                )}
+                <ChevronRight
+                  size={14}
+                  className={`transition-transform ${openIdx === idx ? "rotate-90 text-red-600" : ""}`}
+                />
               </button>
             )}
           </div>
 
+        
           {item.subMenu && openIdx === idx && (
-            <div className="absolute left-0 top-full mt-2 min-w-[200px] bg-white border rounded shadow-lg z-30">
+            <div
+              className={`absolute min-w-[200px] bg-white border rounded shadow-lg z-30 ${
+                level === 0 ? "left-0 top-full mt-2" : "left-full top-0 ml-2"
+              }`}
+            >
               <div className="p-2">
                 <RecursiveMenu items={item.subMenu} level={level + 1} />
               </div>
@@ -741,9 +239,38 @@ function RecursiveMenu({ items, level = 0 }) {
   );
 }
 
-/* -------------------------
-   Mobile recursive list (renders nested items but opens panels on click)
-   ------------------------- */
+
+
+
+
+function FlatSearchResults({ results, onClose }) {
+  if (!results || results.length === 0) {
+    return <p className="px-3 py-4 text-sm text-gray-500">No matches found</p>;
+  }
+
+  return (
+    <ul className="divide-y divide-gray-200">
+      {results.map((r, i) => (
+        <li key={i} className="px-3 py-3">
+          {r.href ? (
+            <a
+              href={r.href}
+              onClick={() => onClose && onClose()}
+              className="block text-left w-full text-base text-gray-800 hover:text-red-600"
+            >
+              <div className="truncate font-medium">{r.name}</div>
+            </a>
+          ) : (
+            <div className="block text-left w-full text-base text-gray-800">
+              <div className="truncate font-medium">{r.name}</div>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function MobileRecursiveList({ items, onOpen}) {
   return (
     <ul className="divide-y divide-gray-200 ">
@@ -751,7 +278,7 @@ function MobileRecursiveList({ items, onOpen}) {
       {items.map((it, i) => (
         <li key={i} className="py-3 ">
           <div className="flex items-center justify-between">
-            <div className="truncate text-xl">{it.name}</div>
+            <div  href={it.href} className=" truncate text-xl"><a href={it.href}>{it.name}</a></div>
             {it.subMenu ? (
               <button
                 onClick={() => onOpen(it)}
@@ -771,11 +298,7 @@ function MobileRecursiveList({ items, onOpen}) {
   );
 }
 
-/* -------------------------
-   Mobile Menu (stacked panels with horizontal slide)
-   width: 50% of viewport
-   ------------------------- */
-function MobileMenu({ items, query, setQuery, onClose }) {
+function MobileMenu({ items, query, setQuery, onClose, flatMatches }) {
   const DURATION = 380;
   const [stack, setStack] = useState([{ title: "Menu", items }]);
   const [index, setIndex] = useState(0);
@@ -801,17 +324,19 @@ function MobileMenu({ items, query, setQuery, onClose }) {
     const newIdx = stack.length - 2;
     setIndex(newIdx);
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setStack((s) => s.slice(0, -1)), 1);
+    timer.current = setTimeout(() => setStack((s) => s.slice(0, -1)), DURATION);
   };
 
+  const isSearching = query && query.trim().length > 0;
+
   return (
-    <div className="">
-      {/* Header: Back + Title + Search (all on one row) */}
+    <div className="h-auto">
+      {/* Header: Back/Close + Title (search moved to Navbar) */}
       <div className="flex items-center gap-2 px-3 py-3 border-b ">
         <div className="flex-shrink-0">
           {stack.length > 1 ? (
             <button onClick={goBack} className="px-2 py-1 rounded hover:bg-gray-100" aria-label="Back">
-             <X size={16} />
+              <X size={16} />
             </button>
           ) : (
             <button onClick={onClose} className="px-2 py-1 rounded hover:bg-gray-100" aria-label="Close">
@@ -820,81 +345,235 @@ function MobileMenu({ items, query, setQuery, onClose }) {
           )}
         </div>
 
-        {/* <div className="flex-1 text-center">
+        <div className="flex-1 px-2 text-center">
           <div className="font-medium truncate">{stack[index]?.title}</div>
-        </div> */}
-
-        <div className="w-36">
-          <div className="flex items-center gap-2 border border-gray-200 rounded px-2 py-1">
-            <Search size={14} className="text-gray-500" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search"
-              className="w-full text-sm outline-none"
-            />
-          </div>
         </div>
       </div>
 
-      {/* Panels container */}
+      {/* If searching, show flat results (access to all menu & sub-menu). Otherwise show panels */}
       <div className="relative overflow-hidden h-full">
-        <div
-          style={{
-            width: `${stack.length * 100}%`,
-            transform: `translateX(-${index * (100 / stack.length)}%)`,
-            transition: `transform ${DURATION}ms ease`,
-            display: "flex",
-            height: "100%",
-          }}
-        >
-          {stack.map((panel, pIdx) => (
-            <div key={pIdx} style={{ width: `${100 / stack.length}%` }} className="p-3 overflow-auto">
-              <MobileRecursiveList items={panel.items} onOpen={openItem} />
-            </div>
-          ))}
-        </div>
+        {isSearching ? (
+          <div className="p-2 overflow-auto">
+            <FlatSearchResults results={flatMatches} onClose={onClose} />
+          </div>
+        ) : (
+          <div
+            style={{
+              width: `${stack.length * 100}%`,
+              transform: `translateX(-${index * (100 / stack.length)}%)`,
+              transition: `transform ${DURATION}ms ease`,
+              display: "flex",
+              height: "100%",
+            }}
+          >
+            {stack.map((panel, pIdx) => (
+              <div key={pIdx} style={{ width: `${100 / stack.length}%` }} className="p-3 overflow-auto">
+                <MobileRecursiveList items={panel.items} onOpen={openItem} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-/* -------------------------
-   Navbar & other UI
-   ------------------------- */
-function Navbar({ mobileOpen, setMobileOpen }) {
+
+function Navbar({ mobileOpen, setMobileOpen, query, setQuery, flatMatches }) {
+  const closeAndClear = () => {
+    setQuery("");
+    setMobileOpen(false);
+  };
+
   return (
     <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          <div className="text-xl font-bold text-red-600">ADDVERB</div>
+        <div className="flex items-center justify-between py-4 gap-4">
+          <div className="flex items-center gap-4">
+            <div className="text-xl font-bold text-red-600">ADDVERB</div>
 
-          <button className="md:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu">
-            <Menu size={24} />
-          </button>
+            {/* Desktop search container */}
+            <div className="hidden sm:block relative">
+              <div className="flex items-center gap-2 border border-gray-200 rounded px-2 py-1 w-[360px]">
+                <Search size={16} className="text-gray-500" />
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search menu & sub-menu"
+                  className="w-full text-sm outline-none"
+                  aria-label="Search menu"
+                />
+              </div>
 
-          <div className="hidden md:block">
-            <RecursiveMenu items={menuItems} />
+              {/* Desktop: show results under input while typing */}
+              {query && query.trim().length > 0 && (
+                <div className="absolute left-0 mt-1 w-full bg-white border rounded shadow-lg z-50 max-h-60 overflow-auto">
+                  <FlatSearchResults results={flatMatches} onClose={closeAndClear} />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="sm:hidden mt-2 px-0 relative">
+          <div className="flex items-center gap-2 border border-gray-200 rounded px-2 py-1">
+            <Search size={14} className="text-gray-500" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search menu & sub-menu"
+              className="w-full text-sm outline-none"
+              aria-label="Search menu (mobile)"
+            />
+          </div>
+
+          {/* Mobile small-screen inline search results */}
+          {query && query.trim().length > 0 && (
+            <div className="absolute left-0 mt-1 w-full bg-white border rounded shadow-lg z-50 max-h-60 overflow-auto">
+              <FlatSearchResults results={flatMatches} onClose={closeAndClear} />
+            </div>
+          )}
+        </div>
+
+          <div className="flex items-center gap-3">
+            {/* <button
+              className="sm:hidden p-2 rounded hover:bg-gray-100"
+              aria-label="Open mobile menu"
+              onClick={() => setMobileOpen((v) => !v)}
+            >
+              <Search size={18} />
+            </button> */}
+
+            <button className="md:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu">
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+
+            <div className="hidden md:block">
+              <RecursiveMenu items={menuItems} />
+            </div>
           </div>
         </div>
+
+        {/* Mobile visible search row (under navbar) — shown only on small screens */}
+        
       </div>
     </nav>
   );
 }
 
-/* -------------------------
-   Simple Hero + Footer (kept minimal)
-   ------------------------- */
-function Hero() {
+
+
+function BannerCarousel({ slides, interval = 5000 }) {
+  const [index, setIndex] = React.useState(0);
+  const timerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, interval);
+    return () => clearInterval(timerRef.current);
+  }, [slides.length, interval]);
+
+  const goPrev = () => setIndex((index - 1 + slides.length) % slides.length);
+  const goNext = () => setIndex((index + 1) % slides.length);
+
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-4xl font-bold">Frontend Developer</h1>
-        <p className="text-gray-600 mt-3">I build fast, responsive web apps with React and modern tooling.</p>
+    <section className="relative w-full h-[500px] overflow-hidden rounded-2xl">
+      {/* Slides */}
+      <div
+        className="flex transition-transform duration-700 ease-in-out"
+        style={{
+          width: `${slides.length * 100}%`,
+          transform: `translateX(-${index * (100 / slides.length)}%)`,
+        }}
+      >
+        {slides.map((s, i) => (
+          <div
+            key={i}
+            className="w-full flex-shrink-0 h-[500px] bg-cover bg-center relative"
+            style={{ backgroundImage: `url(${s.image})` }}
+          >
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-center px-6">
+              <div className="text-white max-w-2xl">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">{s.title}</h2>
+                <p className="text-lg md:text-xl mb-6">{s.subtitle}</p>
+                {s.cta && (
+                  <a
+                    href={s.cta.href}
+                    className="inline-block px-6 py-3 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition"
+                  >
+                    {s.cta.label}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Controls */}
+      <button
+        onClick={goPrev}
+        className="absolute top-1/2 -translate-y-1/2 left-4 p-2 bg-white/80 rounded-full shadow"
+      >
+        ‹
+      </button>
+      <button
+        onClick={goNext}
+        className="absolute top-1/2 -translate-y-1/2 right-4 p-2 bg-white/80 rounded-full shadow"
+      >
+        ›
+      </button>
+
+      {/* Indicators */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`w-3 h-3 rounded-full ${
+              i === index ? "bg-white" : "bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
 }
+
+
+
+function Hero() {
+  const slides = [
+    {
+      title: "Build fast, responsive web apps",
+      subtitle: "Modern React, optimized performance, and delightful UX.",
+      cta: { label: "View Projects", href: "#projects" },
+      image: "/banner/image1.png",
+    },
+    {
+      title: "Design systems & components",
+      subtitle: "Reusable UI patterns for consistent interfaces.",
+      cta: { label: "See Components", href: "#components" },
+      image: "/banner/image2.png",
+    },
+    {
+      title: "Consulting & Engineering",
+      subtitle: "Delivering quality front-end engineering for product teams.",
+      cta: { label: "Contact Me", href: "#contact" },
+      image: "/banner/image3.png",
+    },
+  ];
+
+  return (
+    <div className="py-12">
+      <div className="max-w-7xl mx-auto px-4">
+        <BannerCarousel slides={slides} interval={6000} />
+      </div>
+    </div>
+  );
+}
+
+
+
 
 function Footer() {
   return (
@@ -904,48 +583,93 @@ function Footer() {
   );
 }
 
-/* -------------------------
-   App (wires desktop + mobile)
-   ------------------------- */
+
+
+
+
+
+import { Mic, FileText, File, RefreshCw } from "lucide-react";
+
+const IconRow = () => {
+  return (
+    <div className="flex justify-around items-center w-full max-w-md mx-auto py-4">
+    <div className="flex flex-col items-center text-red-600">
+      <a href='https://addverb.com/podcasts/'>
+        <Mic size={40} />
+        <span className="mt-1 text-sm text-black">Podcast</span>
+      </a>
+    </div>
+    <div className="flex flex-col items-center text-red-600">
+      <a href="https://addverb.com/contact-us/">
+        <FileText size={40} />
+        <span className="mt-1 text-sm text-black">Enquire</span>
+      </a>
+    </div>
+    <div className="flex flex-col items-center text-red-600">
+      <a href="https://addverb.com/blog/">
+        <File size={40} />
+        <span className="mt-1 text-sm text-black">Blog</span>
+      </a>
+    </div>
+    <div className="flex flex-col items-center text-red-600">
+      <a href="https://support.addverb.com/">
+        <RefreshCw size={40} />
+        <span className="mt-1 text-sm text-black">Support</span>
+      </a>
+    </div>
+  </div>
+  );
+};
+
+
+
 function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [query, setQuery] = useState("");
   const filtered = filterMenu(menuItems, query);
+  const flatMatches = searchMenu(menuItems, query);
   const isDesktop = useIsDesktop();
 
   return (
     <>
-      <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+      <Navbar
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
+        query={query}
+        setQuery={setQuery}
+        flatMatches={flatMatches}
+      />
 
-      {/* Mobile sliding panel: covers 50% of viewport width and slides in from the right */}
-      <div
-        className={`fixed inset-y-0 right-0 w-1/2 bg-white z-40 md:hidden transform transition-transform duration-500 ease-out ${
-          mobileOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-        aria-hidden={!mobileOpen}
-      >
-        <MobileMenu items={filtered} query={query} setQuery={setQuery} onClose={() => setMobileOpen(false)} />
-      </div>
-      {/* dimmed backdrop when menu open */}
-      {/* {mobileOpen && (
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="fixed inset-0 bg-black/30 md:hidden"
-          aria-hidden="true"
-        />
-      )} */}
+   
+<div
+  className={`h-auto fixed top-0 right-0 w-1/2 bg-white z-40 md:hidden transform transition-transform duration-500 ease-out ${
+    mobileOpen ? "translate-x-0" : "translate-x-full"
+  }`}
+  aria-hidden={!mobileOpen}
+>
+  <MobileMenu 
+    items={filtered}
+    query={query}
+    setQuery={setQuery}
+    onClose={() => setMobileOpen(false)}
+    flatMatches={flatMatches}
+  />
+
+  <IconRow></IconRow>
+</div>
+
 
       <main >
         <Hero />
       </main>
 
       <Footer />
+     
     </>
   );
 }
 
 export default App;
-// ...existing code...
 
 
 
